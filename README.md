@@ -1,4 +1,4 @@
-# Web Search Agent
+# AI Web Search Agent
 
 A LangChain-powered AI agent that searches the web in response to natural-language queries, using a free Hugging Face LLM and the Tavily Search API.
 
@@ -47,8 +47,8 @@ web-search-agent/
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/<your-username>/web-search-agent.git
-   cd web-search-agent
+   git clone https://github.com/Ahmed-Maher77/AI-Web-Search-Agent.git
+   cd AI-Web-Search-Agent
    ```
 
 2. **Create the virtual environment and install dependencies**
