@@ -29,15 +29,15 @@ This diagram represents a practical pattern for moving from a simple prototype i
 
 ## Tech Stack
 
-| Component | Technology |
-|---|---|
-| Language | Python 3.12 |
-| Package Manager | [uv](https://github.com/astral-sh/uv) |
-| Agent Framework | [LangChain](https://python.langchain.com/) |
-| LLM | [DeepSeek-V4-Flash-0731](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731) via Hugging Face Inference API |
-| Web Search | [Tavily Search API](https://tavily.com/) |
-| Output Validation | [Pydantic](https://docs.pydantic.dev/) |
-| Observability | [LangSmith](https://smith.langchain.com/) |
+| Component         | Technology                                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Language          | Python 3.12                                                                                                        |
+| Package Manager   | [uv](https://github.com/astral-sh/uv)                                                                              |
+| Agent Framework   | [LangChain](https://python.langchain.com/)                                                                         |
+| LLM               | [DeepSeek-V4-Flash-0731](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731) via Hugging Face Inference API |
+| Web Search        | [Tavily Search API](https://tavily.com/)                                                                           |
+| Output Validation | [Pydantic](https://docs.pydantic.dev/)                                                                             |
+| Observability     | [LangSmith](https://smith.langchain.com/)                                                                          |
 
 ## Project Structure
 
@@ -63,30 +63,30 @@ web-search-agent/
 
 1. **Clone the repository**
 
-   ```bash
-   git clone https://github.com/Ahmed-Maher77/AI-Web-Search-Agent.git
-   cd AI-Web-Search-Agent
-   ```
+    ```bash
+    git clone https://github.com/Ahmed-Maher77/AI-Web-Search-Agent.git
+    cd AI-Web-Search-Agent
+    ```
 
 2. **Create the virtual environment and install dependencies**
 
-   ```bash
-   uv venv
-   uv sync
-   ```
+    ```bash
+    uv venv
+    uv sync
+    ```
 
 3. **Configure environment variables**
 
-   Create a `.env` file in the project root with the following keys:
+    Create a `.env` file in the project root with the following keys:
 
-   ```env
-   TAVILY_API_KEY=tvly-xxxxxxxxxxxxxxxxxxxxx
-   HUGGINGFACEHUB_API_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxx
-   LANGSMITH_API_KEY=lsv2_pt_xxxxxxxxxxxxxxxxxxxxx
-   LANGSMITH_TRACING=true
-   ```
+    ```env
+    TAVILY_API_KEY=tvly-xxxxxxxxxxxxxxxxxxxxx
+    HUGGINGFACEHUB_API_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxx
+    LANGSMITH_API_KEY=lsv2_pt_xxxxxxxxxxxxxxxxxxxxx
+    LANGSMITH_TRACING=true
+    ```
 
-   > **Never commit your `.env` file to version control.** It is excluded via `.gitignore` by default.
+    > **Never commit your `.env` file to version control.** It is excluded via `.gitignore` by default.
 
 ## Usage
 
