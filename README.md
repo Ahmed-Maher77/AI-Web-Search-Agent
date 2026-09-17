@@ -10,17 +10,34 @@ This project demonstrates how to build an AI agent that combines a large languag
 2. Uses **Tavily** to retrieve relevant web results.
 3. Returns a structured response containing a concise **answer** and a list of **sources** (title + URL).
 
+## Recommended Architecture
+
+For a production-ready web-search assistant, the architecture should separate user interaction, policy checks, retrieval, and answer validation into distinct stages. This pattern improves resilience, observability, and scalability while reducing the chance of low-quality or unsupported answers.
+
+![Recommended architecture](Recommended-Architecture.png)
+
+### Why this architecture is recommended
+
+- Input guardrails: validate and normalize the user prompt before it reaches the model.
+- Policy and routing layer: classify whether a query needs web search, answer generation, or a fallback path.
+- Search agent loop: issue controlled retrieval requests and evaluate whether the search results are relevant and sufficient.
+- Output validation: check that the final answer has structure, source grounding, and no hallucinated claims.
+- Deterministic control flow: separate LLM reasoning from deterministic validation and fallback logic to make the system more reliable.
+- Scalability: the design can later be extended with async workers, caching, rate limiting, and monitoring without changing the whole application structure.
+
+This diagram represents a practical pattern for moving from a simple prototype into a more robust AI system that can be reliably deployed and scaled.
+
 ## Tech Stack
 
-| Component | Technology |
-|---|---|
-| Language | Python 3.12 |
-| Package Manager | [uv](https://github.com/astral-sh/uv) |
-| Agent Framework | [LangChain](https://python.langchain.com/) |
-| LLM | [DeepSeek-V4-Flash-0731](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731) via Hugging Face Inference API |
-| Web Search | [Tavily Search API](https://tavily.com/) |
-| Output Validation | [Pydantic](https://docs.pydantic.dev/) |
-| Observability | [LangSmith](https://smith.langchain.com/) |
+| Component         | Technology                                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Language          | Python 3.12                                                                                                        |
+| Package Manager   | [uv](https://github.com/astral-sh/uv)                                                                              |
+| Agent Framework   | [LangChain](https://python.langchain.com/)                                                                         |
+| LLM               | [DeepSeek-V4-Flash-0731](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash-0731) via Hugging Face Inference API |
+| Web Search        | [Tavily Search API](https://tavily.com/)                                                                           |
+| Output Validation | [Pydantic](https://docs.pydantic.dev/)                                                                             |
+| Observability     | [LangSmith](https://smith.langchain.com/)                                                                          |
 
 ## Project Structure
 
@@ -46,30 +63,30 @@ web-search-agent/
 
 1. **Clone the repository**
 
-   ```bash
-   git clone https://github.com/Ahmed-Maher77/AI-Web-Search-Agent.git
-   cd AI-Web-Search-Agent
-   ```
+    ```bash
+    git clone https://github.com/Ahmed-Maher77/AI-Web-Search-Agent.git
+    cd AI-Web-Search-Agent
+    ```
 
 2. **Create the virtual environment and install dependencies**
 
-   ```bash
-   uv venv
-   uv sync
-   ```
+    ```bash
+    uv venv
+    uv sync
+    ```
 
 3. **Configure environment variables**
 
-   Create a `.env` file in the project root with the following keys:
+    Create a `.env` file in the project root with the following keys:
 
-   ```env
-   TAVILY_API_KEY=tvly-xxxxxxxxxxxxxxxxxxxxx
-   HUGGINGFACEHUB_API_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxx
-   LANGSMITH_API_KEY=lsv2_pt_xxxxxxxxxxxxxxxxxxxxx
-   LANGSMITH_TRACING=true
-   ```
+    ```env
+    TAVILY_API_KEY=tvly-xxxxxxxxxxxxxxxxxxxxx
+    HUGGINGFACEHUB_API_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxx
+    LANGSMITH_API_KEY=lsv2_pt_xxxxxxxxxxxxxxxxxxxxx
+    LANGSMITH_TRACING=true
+    ```
 
-   > **Never commit your `.env` file to version control.** It is excluded via `.gitignore` by default.
+    > **Never commit your `.env` file to version control.** It is excluded via `.gitignore` by default.
 
 ## Usage
 
