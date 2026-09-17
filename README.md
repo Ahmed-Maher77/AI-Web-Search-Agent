@@ -10,6 +10,23 @@ This project demonstrates how to build an AI agent that combines a large languag
 2. Uses **Tavily** to retrieve relevant web results.
 3. Returns a structured response containing a concise **answer** and a list of **sources** (title + URL).
 
+## Recommended Architecture
+
+For a production-ready web-search assistant, the architecture should separate user interaction, policy checks, retrieval, and answer validation into distinct stages. This pattern improves resilience, observability, and scalability while reducing the chance of low-quality or unsupported answers.
+
+![Recommended architecture](Recommended-Architecture.png)
+
+### Why this architecture is recommended
+
+- Input guardrails: validate and normalize the user prompt before it reaches the model.
+- Policy and routing layer: classify whether a query needs web search, answer generation, or a fallback path.
+- Search agent loop: issue controlled retrieval requests and evaluate whether the search results are relevant and sufficient.
+- Output validation: check that the final answer has structure, source grounding, and no hallucinated claims.
+- Deterministic control flow: separate LLM reasoning from deterministic validation and fallback logic to make the system more reliable.
+- Scalability: the design can later be extended with async workers, caching, rate limiting, and monitoring without changing the whole application structure.
+
+This diagram represents a practical pattern for moving from a simple prototype into a more robust AI system that can be reliably deployed and scaled.
+
 ## Tech Stack
 
 | Component | Technology |
